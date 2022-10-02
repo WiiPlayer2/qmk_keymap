@@ -1,1 +1,5 @@
 SRC += source.c
+
+BOOTMAGIC_ENABLE = yes
+MOUSEKEY_ENABLE = no
+# CONSOLE_ENABLE = yes
