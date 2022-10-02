@@ -77,8 +77,8 @@
       "KC_SLSH",
       "KC_LCTL",
       "KC_TRNS",
-      "KC_LBRC",
-      "KC_RBRC",
+      "KC_ASTR",
+      "KC_LPRN",
       "KC_PLUS",
       "KC_EQL",
       "MO(2)",
@@ -183,7 +183,7 @@
       "KC_TRNS"
     ],
     [
-      "QK_BOOT",
+      "KC_TRNS",
       "KC_F12",
       "KC_F1",
       "KC_F2",
@@ -266,7 +266,7 @@
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",
-      "KC_TRNS",
+      "QK_BOOT",
       "KC_TRNS",
       "KC_TRNS"
     ]
