@@ -79,8 +79,8 @@
       "KC_TRNS",
       "KC_ASTR",
       "KC_LPRN",
-      "KC_PLUS",
-      "KC_EQL",
+      "LCA(KC_7)",
+      "LCA(KC_0)",
       "MO(2)",
       "KC_SPC",
       "KC_ENT",
@@ -129,7 +129,7 @@
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",
-      "KC_LBRC",
+      "LCA(KC_NUBS)",
       "KC_RBRC",
       "KC_P7",
       "KC_P8",
@@ -253,10 +253,10 @@
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",
-      "KC_TRNS",
-      "KC_TRNS",
-      "KC_EQL",
-      "KC_TRNS",
+      "KC_NUBS",
+      "LSFT(KC_NUBS)",
+      "LCA(KC_8)",
+      "LCA(KC_9)",
       "KC_TRNS",
       "KC_TRNS",
       "KC_TRNS",
@@ -271,5 +271,5 @@
       "KC_TRNS"
     ]
   ],
-  "author": ""
+  "author": "Waldemar Tomme"
 }
