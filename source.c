@@ -6,6 +6,12 @@ void keyboard_post_init_user(void) {
     // debug_matrix=true;
     // debug_keyboard=true;
     //debug_mouse=true;
+
+    // Turn off on-board leds
+    setPinOutput(B0);
+    writePinHigh(B0);
+    setPinOutput(D5);
+    writePinHigh(D5);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
