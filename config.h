@@ -11,3 +11,11 @@
 #define LED_CAPS_LOCK_PIN B0
 #define LED_NUM_LOCK_PIN D5
 #define LED_PIN_ON_STATE 0
+
+#undef RGB_DI_PIN
+#undef RGBLED_NUM
+#define RGB_DI_PIN D3
+#define RGBLED_NUM 128
+#define RGBLED_SPLIT { 64, 64 }
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_LIMIT_VAL 255
