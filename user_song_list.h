@@ -3,8 +3,8 @@
 #include "musical_notes.h"
 
 // Custom
-#define LAYER_ON_SONG E__NOTE(_A3), E__NOTE(_A4), E__NOTE(_A5)
-#define LAYER_OFF_SONG E__NOTE(_A5), E__NOTE(_A4), E__NOTE(_A3)
+#define LAYER_ON_SONG S__NOTE(_A4)
+#define LAYER_OFF_SONG S__NOTE(_A2)
 
 // Nier
 #define SONG_OF_THE_ANCIENTS \

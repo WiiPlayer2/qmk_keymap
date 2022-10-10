@@ -5,14 +5,18 @@
 #include "quantum/quantum.h"
 #include "user_song_list.h"
 #include "config.h"
+#define AUDIO_ENABLE
 #endif
 
 #if defined(ENABLE_LAYER_FEEDBACK)
-#define DEFAULT_LAYER 0
+enum layers {
+    _DEFAULT,
+};
 
-layer_state_t last_layer;
+#if defined(AUDIO_ENABLE)
 float layer_on_song[][2] = SONG(LAYER_ON_SONG);
 float layer_off_song[][2] = SONG(LAYER_OFF_SONG);
+#endif
 #endif
 
 void keyboard_post_init_user(void) {
@@ -21,10 +25,6 @@ void keyboard_post_init_user(void) {
     writePinHigh(B0);
     setPinOutput(D5);
     writePinHigh(D5);
-
-#if defined(ENABLE_LAYER_FEEDBACK)
-    last_layer = layer_state;
-#endif
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -38,14 +38,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
 #if defined(ENABLE_LAYER_FEEDBACK)
-    if (!layer_state_is(last_layer)) {
-        if (layer_state_is(DEFAULT_LAYER)) {
-            PLAY_SONG(layer_off_song);
-        } else {
-            PLAY_SONG(layer_on_song);
-        }
-        last_layer = layer_state;
+    if (layer_state_cmp(state, _DEFAULT)) {
+#if defined(AUDIO_ENABLE)
+        PLAY_SONG(layer_off_song);
+#endif
+    } else {
+#if defined(AUDIO_ENABLE)
+        PLAY_SONG(layer_on_song);
+#endif
     }
 #endif
+    return state;
 }
