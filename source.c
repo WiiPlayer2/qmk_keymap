@@ -28,10 +28,12 @@ const rgblight_segment_t PROGMEM rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
 
 #if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_LAYER_BLINK)
 const rgblight_segment_t PROGMEM yes_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {15, 49, HSV_GREEN}
+    {15, 49, HSV_GREEN},
+    {79, 49, HSV_GREEN}
 );
 const rgblight_segment_t PROGMEM no_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {15, 49, HSV_RED}
+    {15, 49, HSV_RED},
+    {79, 49, HSV_RED}
 );
 #endif
 
