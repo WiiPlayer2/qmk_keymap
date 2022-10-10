@@ -15,6 +15,10 @@
 // #define LED_NUM_LOCK_PIN D5
 // #define LED_PIN_ON_STATE 0
 
+// Split keyboard data, need to be enabled on both sides
+// #define SPLIT_TRANSPORT_MIRROR
+// #define SPLIT_WPM_ENABLE
+
 // RGB Lighting
 #undef RGB_DI_PIN
 #undef RGBLED_NUM
