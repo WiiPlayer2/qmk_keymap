@@ -1,3 +1,5 @@
+#pragma once
+
 #include "config_common.h"
 
 #undef MATRIX_COL_PINS
@@ -38,3 +40,5 @@
 #define NO_MUSIC_MODE
 
 #define LAYER_STATE_8BIT // 8 layers for now
+
+// #define ENABLE_LAYER_FEEDBACK
