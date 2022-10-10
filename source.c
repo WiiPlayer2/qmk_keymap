@@ -17,6 +17,16 @@ enum layers {
 float layer_on_song[][2] = SONG(LAYER_ON_SONG);
 float layer_off_song[][2] = SONG(LAYER_OFF_SONG);
 #endif
+
+#if defined(RGBLIGHT_LAYERS)
+const rgblight_segment_t PROGMEM rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 15, HSV_RED},
+    {64, 15, HSV_RED}
+);
+const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    rgb_layer1
+);
+#endif
 #endif
 
 void keyboard_post_init_user(void) {
@@ -25,6 +35,11 @@ void keyboard_post_init_user(void) {
     writePinHigh(B0);
     setPinOutput(D5);
     writePinHigh(D5);
+
+#if defined(RGBLIGHT_LAYERS)
+    // Enable the LED layers
+    rgblight_layers = rgb_layers;
+#endif
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -46,9 +61,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #if defined(AUDIO_ENABLE)
         PLAY_SONG(layer_off_song);
 #endif
+#if defined(RGBLIGHT_LAYERS)
+        rgblight_set_layer_state(0, false);
+#endif
     } else {
 #if defined(AUDIO_ENABLE)
         PLAY_SONG(layer_on_song);
+#endif
+#if defined(RGBLIGHT_LAYERS)
+        rgblight_set_layer_state(0, true);
 #endif
     }
 #endif
