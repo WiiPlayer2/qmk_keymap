@@ -23,10 +23,42 @@ const rgblight_segment_t PROGMEM rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 15, HSV_RED},
     {64, 15, HSV_RED}
 );
-const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    rgb_layer1
+#endif
+#endif
+
+#if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_LAYER_BLINK)
+const rgblight_segment_t PROGMEM yes_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {15, 49, HSV_GREEN}
+);
+const rgblight_segment_t PROGMEM no_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {15, 49, HSV_RED}
 );
 #endif
+
+#if defined(RGBLIGHT_LAYERS)
+const rgblight_segment_t PROGMEM _empty_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 0, HSV_RED});
+
+const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+#if defined(RGBLIGHT_LAYER_BLINK)
+    no_layer,
+    yes_layer,
+#endif
+#if defined(ENABLE_LAYER_FEEDBACK)
+    rgb_layer1,
+#endif
+    _empty_layer
+);
+
+enum _rgb_layers {
+#if defined(RGBLIGHT_LAYER_BLINK)
+    NO_LAYER,
+    YES_LAYER,
+#endif
+#if defined(ENABLE_LAYER_FEEDBACK)
+    RGB_LAYER1,
+#endif
+    EMPTY_LAYER,
+};
 #endif
 
 void keyboard_post_init_user(void) {
@@ -49,10 +81,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
     }
 #endif
+
     return true;
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode)
+    {
+#if defined(AUDIO_ENABLE)
+        case AU_ON:
+        case AU_OFF:
+        case AU_TOG:
+#if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_LAYER_BLINK)
+            rgblight_blink_layer_repeat(audio_is_on() ? YES_LAYER : NO_LAYER, 100, 3);
+#endif
+            break;
+#endif
+
+#if defined(AUDIO_CLICKY)
+        case CK_ON:
+        case CK_OFF:
+        case CK_TOGG:
+#if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_LAYER_BLINK)
+            rgblight_blink_layer_repeat(is_clicky_on() ? YES_LAYER : NO_LAYER, 100, 3);
+#endif
+            break;
+#endif
+    }
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -62,14 +117,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         PLAY_SONG(layer_off_song);
 #endif
 #if defined(RGBLIGHT_LAYERS)
-        rgblight_set_layer_state(0, false);
+        rgblight_set_layer_state(RGB_LAYER1, false);
 #endif
     } else {
 #if defined(AUDIO_ENABLE)
         PLAY_SONG(layer_on_song);
 #endif
 #if defined(RGBLIGHT_LAYERS)
-        rgblight_set_layer_state(0, true);
+        rgblight_set_layer_state(RGB_LAYER1, true);
 #endif
     }
 #endif
