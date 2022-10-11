@@ -10,7 +10,7 @@
 
 #include "sendstring_german.h"
 
-#if defined(ENABLE_LAYER_FEEDBACK)
+#if defined(LAYER_FEEDBACK_ENABLE)
 enum layers {
     _DEFAULT,
 };
@@ -52,7 +52,7 @@ const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     no_layer,
     yes_layer,
 #endif
-#if defined(ENABLE_LAYER_FEEDBACK)
+#if defined(LAYER_FEEDBACK_ENABLE)
     rgb_layer1,
 #endif
     _empty_layer
@@ -63,7 +63,7 @@ enum _rgb_layers {
     NO_LAYER,
     YES_LAYER,
 #endif
-#if defined(ENABLE_LAYER_FEEDBACK)
+#if defined(LAYER_FEEDBACK_ENABLE)
     RGB_LAYER1,
 #endif
     EMPTY_LAYER,
@@ -155,7 +155,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-#if defined(ENABLE_LAYER_FEEDBACK)
+#if defined(LAYER_FEEDBACK_ENABLE)
     if (layer_state_cmp(state, _DEFAULT)) {
 #if defined(AUDIO_ENABLE)
         PLAY_SONG(layer_off_song);

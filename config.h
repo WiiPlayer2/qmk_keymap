@@ -82,5 +82,5 @@
 #define LAYER_STATE_8BIT // 8 layers for now
 
 // Custom
-#define ENABLE_LAYER_FEEDBACK
+#define LAYER_FEEDBACK_ENABLE
 #define MODIFIER_FEEDBACK_ENABLE
