@@ -83,3 +83,4 @@
 
 // Custom
 #define ENABLE_LAYER_FEEDBACK
+#define MODIFIER_FEEDBACK_ENABLE

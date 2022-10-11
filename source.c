@@ -28,6 +28,11 @@ const rgblight_segment_t PROGMEM rgb_layer1[] = RGBLIGHT_LAYER_SEGMENTS(
 #endif
 #endif
 
+#if defined(MODIFIER_FEEDBACK_ENABLE)
+float modifier_on_song[][2] = SONG(MODIFIER_ON_SONG);
+float modifier_off_song[][2] = SONG(MODIFIER_OFF_SONG);
+#endif
+
 #if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_LAYER_BLINK)
 const rgblight_segment_t PROGMEM yes_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 49, HSV_GREEN},
@@ -125,6 +130,26 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
             rgblight_blink_layer_repeat(is_clicky_on() ? YES_LAYER : NO_LAYER, 100, 3);
 #endif
             break;
+#endif
+
+#if defined(MODIFIER_FEEDBACK_ENABLE)
+        case KC_LEFT_CTRL:
+        case KC_LEFT_SHIFT:
+        case KC_LEFT_ALT:
+        case KC_LEFT_GUI:
+        case KC_RIGHT_CTRL:
+        case KC_RIGHT_SHIFT:
+        case KC_RIGHT_ALT:
+        case KC_RIGHT_GUI:
+            if (record->event.pressed) {
+#if defined(AUDIO_ENABLE)
+                PLAY_SONG(modifier_on_song);
+#endif
+            } else {
+#if defined(AUDIO_ENABLE)
+                PLAY_SONG(modifier_off_song);
+#endif
+            }
 #endif
     }
 }
