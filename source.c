@@ -8,6 +8,8 @@
 #define AUDIO_ENABLE
 #endif
 
+#include "sendstring_german.h"
+
 #if defined(ENABLE_LAYER_FEEDBACK)
 enum layers {
     _DEFAULT,
@@ -76,6 +78,17 @@ void keyboard_post_init_user(void) {
 #endif
 }
 
+// Until I can figure out how to use actual custom keys
+#define SS_LAMBDA_ARROW MACRO_0
+
+#define PROCESS_MACRO(key, string) \
+    case key: \
+        if (record->event.pressed) { \
+            SEND_STRING(string); \
+            return false; \
+        } \
+        break;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef CONSOLE_ENABLE
     // If console is enabled, it will print the matrix position and status of each key pressed
@@ -83,6 +96,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
     }
 #endif
+
+    switch(keycode) {
+        PROCESS_MACRO(SS_LAMBDA_ARROW, "=>")
+    }
 
     return true;
 }
