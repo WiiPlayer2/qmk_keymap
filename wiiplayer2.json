@@ -82,7 +82,7 @@
       "RALT(KC_7)",
       "RALT(KC_0)",
       "MO(1)",
-      "KC_SPC",
+      "LT(4,KC_SPC)",
       "KC_ENT",
       "MO(2)",
       "KC_TAB",
